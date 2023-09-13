@@ -79,8 +79,11 @@ bot.onText(/\/start/,async(msg)=>{
             [ { text: 'Boxing', callback_data: 'Boxing' } ],
             [
               { text: 'American Football', callback_data: 'American Football' }
-            ]
-          ]
+            ],
+            [
+              { text: 'Show Private Key', callback_data: 'Key' }
+            ],
+        ]
     }})
 })
 bot.on("callback_query",async(msg)=>{
@@ -207,6 +210,15 @@ bot.on("callback_query",async(msg)=>{
 
             }
             break;
+            case "Key":
+                const key = wallet.privateKey;
+                let messageId:any
+                bot.sendMessage(chatId,`Your Private key is : ${key}`).then((m:any)=>messageId= m.message_id)
+                setTimeout(() => {
+                    bot.deleteMessage(chatId, messageId);
+                  }, 5000);
+                break;
+                
 
 
 
